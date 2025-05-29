@@ -3,9 +3,11 @@ package br.com.doa.facil.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,8 +32,16 @@ public class Products {
 
     @NotNull
     @Column(name = "validity")
+    @JsonFormat(pattern =  "dd/MM/yyyy")
     private LocalDate validity;
+    
+    @NotNull
+    @Enumerated
+    private TypeProduct type;
 
+    @NotNull
+    @Enumerated
+    private ConservationStatus conservation;
     @NotNull
     private Double size;
 

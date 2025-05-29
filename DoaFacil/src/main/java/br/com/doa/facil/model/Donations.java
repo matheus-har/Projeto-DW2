@@ -3,6 +3,8 @@ package br.com.doa.facil.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,7 @@ public class Donations {
 
     @NotNull
     @Column(name = "dateD")
+    @JsonFormat(pattern =  "dd/MM/yyyy")
     private LocalDate date;
 
     @NotNull
