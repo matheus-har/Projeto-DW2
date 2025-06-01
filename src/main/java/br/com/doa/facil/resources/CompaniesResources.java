@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.doa.facil.model.Companies;
 import br.com.doa.facil.repository.CompaniesRepository;
+import br.com.doa.facil.service.CompaniesService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -26,7 +27,7 @@ public class CompaniesResources {
 	private CompaniesRepository companiesRepository;
 	
 	@Autowired
-	private CompaniesRepository companiesService;
+	private CompaniesService companiesService;
 	
 	@GetMapping
 	public List<Companies> list(){

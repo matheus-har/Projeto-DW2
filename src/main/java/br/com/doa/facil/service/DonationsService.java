@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.doa.facil.repository.DonationsRepository;
 import br.com.doa.facil.repository.UsersRepository;
+import br.com.doa.facil.service.exception.NonExistentOrInactiveUserException;
 import br.com.doa.facil.model.Donations;
 import br.com.doa.facil.model.Users;
 
@@ -30,7 +31,7 @@ public class DonationsService {
 
 	public Donations update(Long id, Donations donations) {
 	    Optional<Donations> donation = donationsRepository.findById(id);
-	    if (!donation.isPresent() || !donation.get().getActive()) {
+	    if (!donation.isPresent()) {
 	        throw new NonExistentOrInactiveUserException();
 	    }
 

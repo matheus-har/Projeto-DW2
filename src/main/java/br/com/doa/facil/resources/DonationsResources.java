@@ -26,6 +26,9 @@ public class DonationsResources {
 	@Autowired
 	private DonationsRepository donationsRepository;
 	
+	@Autowired
+	private DonationsService donationsService;
+	
 	@GetMapping
 	public List<Donations> list(){
 		return donationsRepository.findAll();
@@ -43,7 +46,7 @@ public class DonationsResources {
 	
 	@PostMapping
 	public Donations create(@Valid @RequestBody Donations donations) {
-		return DonationsService.save(donations);
+		return donationsRepository.save(donations);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -53,7 +56,7 @@ public class DonationsResources {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Donations> update(@PathVariable Long id, @Valid @RequestBody Donations donations) {
-		Donations donationsSaved = DonationsService.update(id, donations);
+		Donations donationsSaved = donationsService.update(id, donations);
 		return ResponseEntity.ok(donationsSaved);
 	}
 	

@@ -27,7 +27,7 @@ public class ProductsResources {
 	private ProductsRepository productsRepository;
 	
 	@Autowired
-	private ProductsRepository produtyService;
+	private ProductsService productsService;
 	
 	@GetMapping
 	public List<Products> list(){
@@ -45,7 +45,7 @@ public class ProductsResources {
 	
 	@PostMapping
 	public Products create(@Valid @RequestBody Products products) {
-		return produtyService.save(products);
+		return productsService.save(products);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -55,8 +55,8 @@ public class ProductsResources {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Products> update(@PathVariable Long id, @Valid @RequestBody Products products) {
-		Products productsSaved = produtyService.update(id, products);
-		ResponseEntity.ok(productsSaved);
+		Products productsSaved = productsService.update(id, products);
+		return ResponseEntity.ok(productsSaved);
 	}
 	
 }
