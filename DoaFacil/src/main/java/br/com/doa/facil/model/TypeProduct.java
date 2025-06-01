@@ -2,7 +2,7 @@ package br.com.doa.facil.model;
 
 public enum TypeProduct {
 	LIVRO("Livro"),
-	COMIDA("comida"),
+	COMIDA("Comida"),
 	ROUPAS("Roupa"),
 	MOVEIS("Móveis"),
 	BRINQUEDO("Brinquedo");
