@@ -2,14 +2,14 @@ package br.com.doa.facil.model;
 
 import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "companies")
@@ -21,11 +21,11 @@ public class Companies {
 
     @NotNull
     @Size(max = 60)
-    private String registeredName;
+    private String registered_Name;
 
     @NotNull
     @Size(max = 60)
-    private String fantasyName;
+    private String fantasy_Name;
 
     @NotNull
     @Email
@@ -47,20 +47,20 @@ public class Companies {
         this.id = id;
     }
 
-    public String getSocialName() {
-        return registeredName;
+    public String getRegistered_Name() {
+        return registered_Name;
     }
 
-    public void setSocialName(String socialName) {
-        this.registeredName = socialName;
+    public void setRegistered_Name(String social_Name) {
+        this.registered_Name = social_Name;
     }
 
-    public String getFantasyName() {
-        return fantasyName;
+    public String getFantasy_Name() {
+        return fantasy_Name;
     }
 
-    public void setFantasyName(String fantasyName) {
-        this.fantasyName = fantasyName;
+    public void setFantasy_Name(String fantasy_Name) {
+        this.fantasy_Name = fantasy_Name;
     }
 
     public String getEmail() {
@@ -94,10 +94,12 @@ public class Companies {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
+        if (this == obj) {
+			return true;
+		}
+        if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
         Companies other = (Companies) obj;
         return Objects.equals(id, other.id);
     }

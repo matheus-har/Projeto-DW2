@@ -1,12 +1,12 @@
 CREATE TABLE `donations` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `donorId` bigint(20) NOT NULL,
-  `recipientId` bigint(20) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `dateD`date NOT NULL,
-  `product` varchar(50) NOT NULL,
-  `pickupLocation` varchar(70),
+  `donor_Id` bigint(20) NOT NULL,
+  `recipient_Id` bigint(20) NOT NULL,
+  `date`date NOT NULL,
+  `product_Id` bigint(50) NOT NULL,
+  `pickup_Location` varchar(70),
+  `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (donorId) REFERENCES users(id),
-  FOREIGN KEY (donorId) REFERENCES users(id)
+  FOREIGN KEY (`donor_Id`) REFERENCES users(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`recipient_Id`) REFERENCES users(`id`)   ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -3,6 +3,8 @@ package br.com.doa.facil.resources;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.doa.facil.model.Products;
 import br.com.doa.facil.repository.ProductsRepository;
 import br.com.doa.facil.service.ProductsService;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/products")
@@ -25,15 +26,20 @@ public class ProductsResources {
 
 	@Autowired
 	private ProductsRepository productsRepository;
-	
+
 	@Autowired
 	private ProductsService productsService;
-	
-	@GetMapping
-	public List<Products> list(){
-		return productsRepository.findAll();
+
+	@PostMapping
+	public Products create(@Valid @RequestBody Products products) {
+		return productsService.save(products);
 	}
-	
+
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		productsRepository.deleteById(id);
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Products> findById(@PathVariable Long id){
 		Optional<Products> products = productsRepository.findById(id);
@@ -42,21 +48,16 @@ public class ProductsResources {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
-	@PostMapping
-	public Products create(@Valid @RequestBody Products products) {
-		return productsService.save(products);
+
+	@GetMapping
+	public List<Products> list(){
+		return productsRepository.findAll();
 	}
-	
-	@DeleteMapping("/{id}")
-	public void delete(@PathVariable Long id) {
-		productsRepository.deleteById(id);
-	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<Products> update(@PathVariable Long id, @Valid @RequestBody Products products) {
 		Products productsSaved = productsService.update(id, products);
 		return ResponseEntity.ok(productsSaved);
 	}
-	
+
 }

@@ -3,19 +3,18 @@ package br.com.doa.facil.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "donations")
@@ -27,33 +26,29 @@ public class Donations {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "donorId", referencedColumnName = "id")
+    @JoinColumn(name = "donor_Id", referencedColumnName = "id")
     private Users donor;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "recipientId", referencedColumnName = "id")
+    @JoinColumn(name = "recipient_Id", referencedColumnName = "id")
     private Users recipient;
 
     @NotNull
-    @Email
-    @Size(max = 100)
-    private String email;
-
-    @NotNull
-    @Column(name = "dateD")
     @JsonFormat(pattern =  "dd/MM/yyyy")
     private LocalDate date;
 
     @NotNull
-    @Size(max = 50)
-    private String product;
+    private Long product_Id;
 
     @Size(max = 70)
-    @Column(name = "pickupLocation")
-    private String pickupLocation;
+    @Column(name = "pickup_Location")
+    private String pickup_Location;
+    
+    @NotNull
+    private Boolean active;
 
-    public Long getId() {
+	public Long getId() {
         return id;
     }
 
@@ -73,16 +68,8 @@ public class Donations {
         return recipient;
     }
 
-    public void setRecipient(Users recipient) {
+    public void setRecipient_Id(Users recipient) {
         this.recipient = recipient;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public LocalDate getDate() {
@@ -93,21 +80,29 @@ public class Donations {
         this.date = date;
     }
 
-    public String getProduct() {
-        return product;
+    public Long getProduct_Id() {
+        return product_Id;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setProduct_Id(Long product_Id) {
+        this.product_Id = product_Id;
     }
 
-    public String getPickupLocation() {
-        return pickupLocation;
+    public String getPickup_Location() {
+        return pickup_Location;
     }
 
-    public void setPickupLocation(String pickupLocation) {
-        this.pickupLocation = pickupLocation;
+    public void setPickup_Location(String pickup_Location) {
+        this.pickup_Location = pickup_Location;
     }
+    
+    public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 
     @Override
     public int hashCode() {
@@ -116,10 +111,12 @@ public class Donations {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
+        if (this == obj) {
+			return true;
+		}
+        if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
         Donations other = (Donations) obj;
         return Objects.equals(id, other.id);
     }

@@ -6,13 +6,13 @@ public enum TypeProduct {
 	ROUPAS("Roupa"),
 	MOVEIS("Móveis"),
 	BRINQUEDO("Brinquedo");
-	
+
 	private String description;
-	
+
 	private TypeProduct(String description) {
 		this.description = description;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}

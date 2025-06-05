@@ -1,6 +1,5 @@
 package br.com.doa.facil.service;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -15,14 +14,24 @@ public class CompaniesService {
 	private CompaniesRepository companiesRepository;
 
 	public Companies save(Companies companie) {
-		return companiesRepository.save(companie);
+		return companiesRepository.save(companie); 
 	}
 
-	public Companies update(Long id, Companies companie) {
+	public Companies update(Long id, Companies updateCompanie) {
 		Companies companieSaved = companiesRepository.findById(id)
-				.orElseThrow(() -> new EmptyResultDataAccessException(1));
-		BeanUtils.copyProperties(companie, companieSaved, "id");
-		return companiesRepository.save(companieSaved);
+				.orElseThrow(() -> new EmptyResultDataAccessException("Empresa não encontrada",1));
+		
+		companieSaved.setRegistered_Name(updateCompanie.getRegistered_Name());
+		companieSaved.setFantasy_Name(updateCompanie.getFantasy_Name());
+		companieSaved.setEmail(updateCompanie.getEmail());
+		companieSaved.setTelephone(updateCompanie.getTelephone());
+		companieSaved.setActive(updateCompanie.getActive());
+
+	    return this.save(companieSaved);
+	}
+	
+	public Companies findDonationById(Long id) {
+	    return companiesRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
 	}
 
 }
