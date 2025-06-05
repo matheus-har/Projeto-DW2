@@ -25,6 +25,7 @@ public class CompaniesService {
 		companieSaved.setFantasy_Name(updateCompanie.getFantasy_Name());
 		companieSaved.setEmail(updateCompanie.getEmail());
 		companieSaved.setTelephone(updateCompanie.getTelephone());
+		companieSaved.setUser_Resp(updateCompanie.getUser_Resp());
 		companieSaved.setActive(updateCompanie.getActive());
 
 	    return this.save(companieSaved);

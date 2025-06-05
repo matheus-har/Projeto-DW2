@@ -3,18 +3,19 @@ package br.com.doa.facil.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "donations")
@@ -39,7 +40,9 @@ public class Donations {
     private LocalDate date;
 
     @NotNull
-    private Long product_Id;
+    @OneToOne
+    @JoinColumn(name = "product_Id", referencedColumnName = "id")
+    private Products product_Id;
 
     @Size(max = 70)
     @Column(name = "pickup_Location")
@@ -80,15 +83,20 @@ public class Donations {
         this.date = date;
     }
 
-    public Long getProduct_Id() {
-        return product_Id;
-    }
+    
+    public Products getProduct_Id() {
+		return product_Id;
+	}
 
-    public void setProduct_Id(Long product_Id) {
-        this.product_Id = product_Id;
-    }
+	public void setProduct_Id(Products product_Id) {
+		this.product_Id = product_Id;
+	}
 
-    public String getPickup_Location() {
+	public void setRecipient(Users recipient) {
+		this.recipient = recipient;
+	}
+
+	public String getPickup_Location() {
         return pickup_Location;
     }
 

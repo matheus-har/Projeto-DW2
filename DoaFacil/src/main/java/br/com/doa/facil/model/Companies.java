@@ -2,14 +2,16 @@ package br.com.doa.facil.model;
 
 import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "companies")
@@ -36,6 +38,10 @@ public class Companies {
     @Size(max = 11)
     private String telephone;
 
+    @OneToOne
+    @JoinColumn(name = "user_Resp", referencedColumnName = "id")
+    private Users user_Resp;
+    
     @NotNull
     private Boolean active;
 
@@ -79,7 +85,16 @@ public class Companies {
         this.telephone = telephone;
     }
 
-    public Boolean getActive() {
+    
+    public Users getUser_Resp() {
+		return user_Resp;
+	}
+
+	public void setUser_Resp(Users user_Resp) {
+		this.user_Resp = user_Resp;
+	}
+
+	public Boolean getActive() {
         return active;
     }
 
